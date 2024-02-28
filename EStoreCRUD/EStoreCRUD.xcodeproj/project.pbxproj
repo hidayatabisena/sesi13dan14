@@ -20,6 +20,7 @@
 		5364B4EC2B8E294700637AD8 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364B4EB2B8E294700637AD8 /* ErrorMessage.swift */; };
 		5364B4EF2B8E2B0300637AD8 /* UserRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364B4EE2B8E2B0300637AD8 /* UserRowView.swift */; };
 		5364B4F12B8E2C8000637AD8 /* UsersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364B4F02B8E2C8000637AD8 /* UsersListView.swift */; };
+		53BA94E32B8EB81B006468EE /* UsersDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA94E22B8EB81B006468EE /* UsersDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		5364B4EB2B8E294700637AD8 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		5364B4EE2B8E2B0300637AD8 /* UserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRowView.swift; sourceTree = "<group>"; };
 		5364B4F02B8E2C8000637AD8 /* UsersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListView.swift; sourceTree = "<group>"; };
+		53BA94E22B8EB81B006468EE /* UsersDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				5364B4C82B8E10B400637AD8 /* RegisterView.swift */,
 				5364B4F02B8E2C8000637AD8 /* UsersListView.swift */,
+				53BA94E22B8EB81B006468EE /* UsersDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				5364B4EC2B8E294700637AD8 /* ErrorMessage.swift in Sources */,
 				5364B4E32B8E1B6600637AD8 /* AuthService.swift in Sources */,
 				5364B4EF2B8E2B0300637AD8 /* UserRowView.swift in Sources */,
+				53BA94E32B8EB81B006468EE /* UsersDetailView.swift in Sources */,
 				5364B4EA2B8E27DA00637AD8 /* UsersViewModel.swift in Sources */,
 				5364B4DC2B8E181200637AD8 /* User.swift in Sources */,
 				5364B4DF2B8E19A100637AD8 /* Constant.swift in Sources */,

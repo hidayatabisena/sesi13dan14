@@ -13,6 +13,7 @@ struct Constant {
     static let endpoint = "users"
     
     static let registerView = "Registration"
+    static let usersList = "List of User"
     
     static func fullEndpoint() -> URL? {
         let fullURLString = URL(string: "\(baseURL)\(apiVersion)/\(endpoint)")

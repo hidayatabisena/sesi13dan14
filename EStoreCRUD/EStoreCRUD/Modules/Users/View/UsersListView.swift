@@ -9,14 +9,27 @@ import SwiftUI
 
 struct UsersListView: View {
     @StateObject private var userVM = UsersViewModel()
+    @State private var showSheet: Bool = false
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(userVM.users) { user in
-                    UserRowView(user: user)
+                    Button {
+                        showDetailSheet(for: user)
+                    } label: {
+                        UserRowView(user: user)
+                    }
                 }
                 .onDelete(perform: delete)
+            }
+            .navigationTitle(Constant.usersList)
+            .sheet(isPresented: $showSheet) {
+                if let selectedUser = userVM.selectedUser {
+                    UsersDetailView(user: selectedUser)
+                        .presentationDetents([.medium, .large])
+                        .presentationDragIndicator(.visible)
+                }
             }
             .refreshable {
                 await userVM.loadUsers()
@@ -32,6 +45,11 @@ struct UsersListView: View {
     
     func delete(at offsets: IndexSet) {
         userVM.users.remove(atOffsets: offsets)
+    }
+    
+    func showDetailSheet(for user: User) {
+        userVM.selectedUser = user
+        self.showSheet = true
     }
 }
 

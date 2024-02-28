@@ -12,6 +12,7 @@ class UsersViewModel: ObservableObject {
     @Published var users: [User] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var selectedUser: User? = nil
     
     private let service = APIService()
     
