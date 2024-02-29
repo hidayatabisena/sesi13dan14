@@ -37,5 +37,5 @@ struct ProductListView: View {
 //    let vm = ProductVM()
 //    vm.products = Product.dummy
     
-    return ProductListView(categoryId: 2)
+    return ProductListView(categoryId: 5)
 }
