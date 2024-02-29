@@ -19,6 +19,8 @@ struct AddProduct: View {
     )
     
     @State private var productImage = UIImage(named: "newphoto")!
+    @State private var showPhoto: Bool = false
+    @State private var photoSource: PhotoSource?
     
     var body: some View {
         NavigationStack {
@@ -35,6 +37,9 @@ struct AddProduct: View {
                     .background(Color(.systemGray6))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .padding(.bottom)
+                    .onTapGesture {
+                        self.showPhoto.toggle()
+                    }
                 
                 Button("Submit product") {
                     Task {
@@ -46,6 +51,23 @@ struct AddProduct: View {
             .padding()
             .navigationTitle("Form Product")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .confirmationDialog("Choose your photo source", isPresented: $showPhoto) {
+            Button("Camera") {
+                self.photoSource = .camera
+            }
+            
+            Button("Photo Library") {
+                self.photoSource = .photoLibrary
+            }
+        }
+        .fullScreenCover(item: $photoSource) { source in
+            switch source {
+            case .photoLibrary:
+                ImagePicker(sourceType: .photoLibrary, selectedImage: $productImage)
+            case .camera:
+                ImagePicker(sourceType: .camera, selectedImage: $productImage)
+            }
         }
     }
     

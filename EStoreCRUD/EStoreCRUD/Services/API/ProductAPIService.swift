@@ -9,7 +9,7 @@ import Foundation
 
 class ProductAPIService {
     static let shared = ProductAPIService()
-    private init() {}
+    // private init() {}
     
     // MARK: - FETCH PRODUCT
     func fetchProductsByCategory(categoryId: Int) async throws -> [Product] {

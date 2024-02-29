@@ -16,6 +16,8 @@
 		530838002B90C4E00083860E /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530837FF2B90C4E00083860E /* ProductListView.swift */; };
 		530838022B90C7C90083860E /* CreateProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530838012B90C7C90083860E /* CreateProduct.swift */; };
 		530838042B90CB0E0083860E /* AddProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530838032B90CB0E0083860E /* AddProduct.swift */; };
+		530838062B90CFBB0083860E /* PhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530838052B90CFBB0083860E /* PhotoSource.swift */; };
+		530838082B90D1020083860E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530838072B90D1020083860E /* ImagePicker.swift */; };
 		5364B4C72B8E10B400637AD8 /* EStoreCRUDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364B4C62B8E10B400637AD8 /* EStoreCRUDApp.swift */; };
 		5364B4C92B8E10B400637AD8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364B4C82B8E10B400637AD8 /* RegisterView.swift */; };
 		5364B4CB2B8E10B700637AD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5364B4CA2B8E10B700637AD8 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		530837FF2B90C4E00083860E /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		530838012B90C7C90083860E /* CreateProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProduct.swift; sourceTree = "<group>"; };
 		530838032B90CB0E0083860E /* AddProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProduct.swift; sourceTree = "<group>"; };
+		530838052B90CFBB0083860E /* PhotoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSource.swift; sourceTree = "<group>"; };
+		530838072B90D1020083860E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5364B4C32B8E10B400637AD8 /* EStoreCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EStoreCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5364B4C62B8E10B400637AD8 /* EStoreCRUDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStoreCRUDApp.swift; sourceTree = "<group>"; };
 		5364B4C82B8E10B400637AD8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 				5364B4DE2B8E19A100637AD8 /* Constant.swift */,
 				5364B4EB2B8E294700637AD8 /* ErrorMessage.swift */,
 				530837F72B90BEEA0083860E /* NetworkService.swift */,
+				530838052B90CFBB0083860E /* PhotoSource.swift */,
+				530838072B90D1020083860E /* ImagePicker.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -345,11 +351,13 @@
 				5364B4E52B8E1E8400637AD8 /* AuthViewModel.swift in Sources */,
 				5364B4EC2B8E294700637AD8 /* ErrorMessage.swift in Sources */,
 				5364B4E32B8E1B6600637AD8 /* AuthService.swift in Sources */,
+				530838062B90CFBB0083860E /* PhotoSource.swift in Sources */,
 				5364B4EF2B8E2B0300637AD8 /* UserRowView.swift in Sources */,
 				53BA94E32B8EB81B006468EE /* UsersDetailView.swift in Sources */,
 				530837F12B90B99B0083860E /* Category.swift in Sources */,
 				530837F82B90BEEA0083860E /* NetworkService.swift in Sources */,
 				5364B4EA2B8E27DA00637AD8 /* UsersViewModel.swift in Sources */,
+				530838082B90D1020083860E /* ImagePicker.swift in Sources */,
 				5364B4DC2B8E181200637AD8 /* User.swift in Sources */,
 				530837FE2B90C28C0083860E /* ProductRowView.swift in Sources */,
 				530838002B90C4E00083860E /* ProductListView.swift in Sources */,
@@ -495,6 +503,8 @@
 				DEVELOPMENT_TEAM = EJGCGKY84H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "You need to grant the app access to your camera in order to take photos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "You need to grant the app access to your photo library so you can pick your product photo.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -524,6 +534,8 @@
 				DEVELOPMENT_TEAM = EJGCGKY84H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "You need to grant the app access to your camera in order to take photos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "You need to grant the app access to your photo library so you can pick your product photo.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
