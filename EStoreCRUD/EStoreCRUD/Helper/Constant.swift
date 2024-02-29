@@ -20,6 +20,7 @@ struct Constant {
     enum Endpoint {
         case users
         case productsByCategory(Int)
+        case createProduct
         
         func path() -> String {
             switch self {
@@ -27,6 +28,8 @@ struct Constant {
                 return "users"
             case .productsByCategory(let categoryId):
                 return "categories/\(categoryId)/products"
+            case .createProduct:
+                return "products"
             }
         }
         
