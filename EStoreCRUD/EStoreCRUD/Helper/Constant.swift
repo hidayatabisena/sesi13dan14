@@ -10,15 +10,35 @@ import Foundation
 struct Constant {
     static let baseURL = "https://api.escuelajs.co/api/"
     static let apiVersion = "v1"
-    static let endpoint = "users"
+    // static let endpoint = "users"
+    
+//    static func fullEndpoint() -> URL? {
+//        let fullURLString = URL(string: "\(baseURL)\(apiVersion)/\(endpoint)")
+//        return fullURLString
+//    }
+    
+    enum Endpoint {
+        case users
+        case productsByCategory(Int)
+        
+        func path() -> String {
+            switch self {
+            case .users:
+                return "users"
+            case .productsByCategory(let categoryId):
+                return "categories/\(categoryId)/products"
+            }
+        }
+        
+        func fullURLEndpoint() -> URL? {
+            let fullURL = URL(string: "\(baseURL)\(apiVersion)/\(self.path())")
+            
+            return fullURL
+        }
+    }
     
     static let registerView = "Registration"
     static let usersList = "List of User"
-    
-    static func fullEndpoint() -> URL? {
-        let fullURLString = URL(string: "\(baseURL)\(apiVersion)/\(endpoint)")
-        return fullURLString
-    }
 }
 
 enum HTTPMethod: String {

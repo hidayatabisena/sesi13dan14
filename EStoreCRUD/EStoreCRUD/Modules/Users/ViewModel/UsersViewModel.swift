@@ -14,7 +14,7 @@ class UsersViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var selectedUser: User? = nil
     
-    private let service = APIService()
+    private let service = UserAPIService()
     
     func loadUsers() async {
         isLoading = true

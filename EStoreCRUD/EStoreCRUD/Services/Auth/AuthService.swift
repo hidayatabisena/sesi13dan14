@@ -13,7 +13,7 @@ class AuthService {
     private init() {}
     
     func createUser(with user: User) async throws -> User {
-        guard let url = Constant.fullEndpoint() else {
+        guard let url = Constant.Endpoint.users.fullURLEndpoint() else {
             throw URLError(.badURL)
         }
         
@@ -22,15 +22,7 @@ class AuthService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(user)
         
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw URLError(.badServerResponse)
-        }
-        
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.init(rawValue: httpResponse.statusCode))
-        }
+        let data = try await NetworkService.shared.postData(with: request)
         
         let results = try JSONDecoder().decode(User.self, from: data)
         
