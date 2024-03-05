@@ -88,4 +88,19 @@ extension ProductAPIService {
     }
 }
 
-
+// MARK: - DELETE PRODUCT
+extension ProductAPIService {
+    func deleteProduct(withId id: Int) async throws -> Bool {
+        guard let url = Constant.Endpoint.deleteProduct(id).fullURLEndpoint() else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.delete.rawValue
+        
+        let data = try await NetworkService.shared.postData(with: request)
+        let results = try JSONDecoder().decode(Bool.self, from: data)
+        
+        return results
+    }
+}

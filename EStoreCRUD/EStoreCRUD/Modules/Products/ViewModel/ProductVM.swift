@@ -82,3 +82,25 @@ extension ProductVM {
         }
     }
 }
+
+// MARK: - DELETE PRODUCT
+extension ProductVM {
+    func deleteProduct(withId id: Int) async {
+        isLoading = true
+        
+        do {
+            let success = try await ProductAPIService.shared.deleteProduct(withId: id)
+            if success {
+                // Menghapus produk dari daftar lokal setelah berhasil dihapus dari server
+                self.products.removeAll { $0.id == id }
+            } else {
+                // Handle gagalnya penghapusan produk
+                self.errorMessage = "Failed to delete the product."
+            }
+        } catch {
+            self.errorMessage = "Failed to delete the product: \(error.localizedDescription)"
+        }
+        
+        isLoading = false
+    }
+}

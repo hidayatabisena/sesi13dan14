@@ -22,6 +22,8 @@ struct Constant {
         case productsByCategory(Int)
         case createProduct
         case uploadFile
+        case deleteProduct(Int)
+        case login
         
         func path() -> String {
             switch self {
@@ -33,6 +35,10 @@ struct Constant {
                 return "products"
             case .uploadFile:
                 return "files/upload"
+            case .deleteProduct(let productId):
+                return "products/\(productId)"
+            case .login:
+                return "auth/login"
             }
         }
         
@@ -47,16 +53,9 @@ struct Constant {
     static let usersList = "List of User"
 }
 
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case delete = "DELETE"
-    case patch = "PATCH"
-}
-
-enum FailedMessage {
-    static let notConnectedToInternet = "The internet connection appears to be offline. Please try again or tap refresh button"
-    static let timeout = "The network request timed out"
-    static let unexpected = "An unexpected network error occured. "
+enum FailedMessages {
+    static let notConnectedToInternet = "The internet connection appears to be offline. Please try again later."
+    static let timeout = "The network request timed out. Please check your connection and try again."
+    static let unexpected = "An unexpected network error occurred. Please try again."
+    static let cannotParseResponse = "The data cannot be parsed to the expected format. Please check your input form."
 }

@@ -19,6 +19,15 @@ struct ProductListView: View {
                 } else {
                     List(productVM.products) { product in
                         TempProductRow(product: product)
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    Task {
+                                        await productVM.deleteProduct(withId: product.id)
+                                    }
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                     }
                 }
             }

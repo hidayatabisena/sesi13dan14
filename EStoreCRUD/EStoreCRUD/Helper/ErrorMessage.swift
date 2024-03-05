@@ -13,27 +13,26 @@ struct ErrorMessage {
         case let urlError as URLError:
             return message(for: urlError)
         default:
-            return FailedMessage.unexpected
+            return FailedMessages.unexpected
         }
     }
     
     private static func message(for urlError: URLError) -> String {
         switch urlError.code {
         case .notConnectedToInternet:
-            return FailedMessage.notConnectedToInternet
-            
+            return FailedMessages.notConnectedToInternet
         case .timedOut:
-            return FailedMessage.timeout
-            
+            return FailedMessages.timeout
+        case .cannotParseResponse:
+            return FailedMessages.cannotParseResponse
         default:
-            return FailedMessage.unexpected
+            return FailedMessages.unexpected
         }
     }
 }
 
 enum ImageError: Error {
     case conversionFailed
-    case fileNotSupported
 }
 
 extension ImageError: LocalizedError {
@@ -41,8 +40,11 @@ extension ImageError: LocalizedError {
         switch self {
         case .conversionFailed:
             return "Failed to convert image."
-        case .fileNotSupported:
-            return "File doesn't support"
         }
     }
+}
+
+struct ServerErrorResponse: Codable {
+    let message: String
+    let statusCode: Int?
 }
