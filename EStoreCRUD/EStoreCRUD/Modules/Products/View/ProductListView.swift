@@ -36,7 +36,7 @@ struct ProductListView: View {
                 productVM.isLoading ? ProgressView() : nil
             }
             .task {
-                await productVM.loadProducts(forCategory: categoryId)
+                await productVM.loadProducts(forCategoryId: categoryId)
             }
         }
     }

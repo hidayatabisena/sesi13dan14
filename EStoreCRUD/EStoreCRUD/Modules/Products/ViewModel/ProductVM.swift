@@ -15,7 +15,7 @@ class ProductVM: ObservableObject {
     @Published var errorMessage: String?
     
     // MARK: - LOAD PRODUCTS
-    func loadProducts(forCategory categoryId: Int) async {
+    func loadProducts(forCategoryId categoryId: Int) async {
         isLoading = true
         errorMessage = nil
         
@@ -35,34 +35,19 @@ class ProductVM: ObservableObject {
 extension ProductVM {
     func addProduct(title: String, price: Double, description: String, categoryId: Int, images: [String]) async {
         isLoading = true
-        
         do {
             let createdProduct = try await ProductAPIService.shared.createProduct(title: title, price: price, description: description, categoryId: categoryId, images: images)
             
-            products.append(createdProduct)
-            print(createdProduct)
+            self.products.append(createdProduct)
+            
         } catch {
-            errorMessage = "Failed to create product: \(error.localizedDescription)"
+            
+            self.errorMessage = "Failed to create product: \(error.localizedDescription)"
+            
         }
         
-        isLoading = false
-    }
-}
-
-// MARK: - ADD PRODUCT WITH IMAGE
-extension ProductVM {
-    func addProductWithImage(title: String, price: Double, description: String, categoryId: Int, image: UIImage) async {
-        // Langkah 1: Mengunggah gambar
-        guard let imageUrl = await uploadImage(image: image) else {
-            // Handle jika imageUrl nil, misalnya dengan menampilkan pesan error.
-            self.errorMessage = ErrorMessage.message(for: ImageError.conversionFailed)
-            return
-        }
+        self.isLoading = false
         
-        // Langkah 2: Menambahkan produk dengan URL gambar
-        // Karena uploadImage sudah menghandle error-nya sendiri dan tidak melempar error,
-        // tidak perlu menggunakan try-catch di sini.
-        await addProduct(title: title, price: price, description: description, categoryId: categoryId, images: [imageUrl])
     }
 }
 
@@ -83,6 +68,23 @@ extension ProductVM {
     }
 }
 
+// MARK: - ADD PRODUCT WITH IMAGE
+extension ProductVM {
+    func addProductWithImage(title: String, price: Double, description: String, categoryId: Int, image: UIImage) async {
+        // Langkah 1: Upload Image
+        guard let imageUrl = await uploadImage(image: image) else {
+            // Handle jika imageUrl nil, tampilkan pesan error.
+            self.errorMessage = ErrorMessage.message(for: ImageError.conversionFailed)
+            return
+        }
+        
+        // Langkah 2: Menambahkan produk dengan URL gambar
+        // Karena uploadImage sudah menghandle error-nya sendiri dan tidak melempar error,
+        // tidak perlu menggunakan try-catch di sini.
+        await addProduct(title: title, price: price, description: description, categoryId: categoryId, images: [imageUrl])
+    }
+}
+
 // MARK: - DELETE PRODUCT
 extension ProductVM {
     func deleteProduct(withId id: Int) async {
@@ -91,10 +93,10 @@ extension ProductVM {
         do {
             let success = try await ProductAPIService.shared.deleteProduct(withId: id)
             if success {
-                // Menghapus produk dari daftar lokal setelah berhasil dihapus dari server
+                // Menghapus produk dari UI setelah berhasil dihapus dari server
                 self.products.removeAll { $0.id == id }
             } else {
-                // Handle gagalnya penghapusan produk
+                // Handle gagalnya
                 self.errorMessage = "Failed to delete the product."
             }
         } catch {
