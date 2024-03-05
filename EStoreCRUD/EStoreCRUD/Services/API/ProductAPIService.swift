@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import Alamofire
 
 class ProductAPIService {
     static let shared = ProductAPIService()
@@ -35,6 +37,8 @@ extension ProductAPIService {
             throw URLError(.badURL)
         }
         
+        print("We are accessing url \(url)")
+        
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -42,6 +46,7 @@ extension ProductAPIService {
         let newProductData = CreateProduct(title: title, price: price, description: description, categoryId: categoryId, images: images)
         
         request.httpBody = try JSONEncoder().encode(newProductData)
+        print(String(data: request.httpBody!, encoding: .utf8) ?? "No body data")
         
         let data = try await NetworkService.shared.postData(with: request)
         
@@ -50,3 +55,37 @@ extension ProductAPIService {
         return createdProduct
     }
 }
+
+// MARK: - UPLOAD IMAGE
+extension ProductAPIService {
+    func uploadImage(image: UIImage) async throws -> String {
+        guard let url = Constant.Endpoint.uploadFile.fullURLEndpoint() else {
+            throw URLError(.badURL)
+        }
+        
+        // Pastikan image bisa di-convert ke Data
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            throw ImageError.conversionFailed
+        }
+        
+        // Menggunakan Alamofire untuk upload
+        let data = try await withCheckedThrowingContinuation { continuation in
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+            }, to: url)
+            .validate()
+            .responseDecodable(of: UploadResponse.self) { response in
+                switch response.result {
+                case .success(let uploadResponse):
+                    continuation.resume(returning: uploadResponse.location)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+        
+        return data
+    }
+}
+
+

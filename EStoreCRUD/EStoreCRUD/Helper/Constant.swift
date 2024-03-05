@@ -21,6 +21,7 @@ struct Constant {
         case users
         case productsByCategory(Int)
         case createProduct
+        case uploadFile
         
         func path() -> String {
             switch self {
@@ -30,6 +31,8 @@ struct Constant {
                 return "categories/\(categoryId)/products"
             case .createProduct:
                 return "products"
+            case .uploadFile:
+                return "files/upload"
             }
         }
         

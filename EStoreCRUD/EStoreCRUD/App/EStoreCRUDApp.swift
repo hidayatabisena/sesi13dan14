@@ -11,7 +11,7 @@ import SwiftUI
 struct EStoreCRUDApp: App {
     var body: some Scene {
         WindowGroup {
-            RegisterView()
+            AddProduct()
         }
     }
 }

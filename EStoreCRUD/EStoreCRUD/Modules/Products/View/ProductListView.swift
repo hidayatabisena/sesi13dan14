@@ -18,7 +18,7 @@ struct ProductListView: View {
                     ContentUnavailableView("No products yet", systemImage: "cart.badge.questionmark", description: Text("Try checking another products, or you can comeback later!!!"))
                 } else {
                     List(productVM.products) { product in
-                        ProductRowView(product: product)
+                        TempProductRow(product: product)
                     }
                 }
             }

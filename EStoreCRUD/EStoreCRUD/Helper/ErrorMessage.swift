@@ -30,3 +30,19 @@ struct ErrorMessage {
         }
     }
 }
+
+enum ImageError: Error {
+    case conversionFailed
+    case fileNotSupported
+}
+
+extension ImageError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .conversionFailed:
+            return "Failed to convert image."
+        case .fileNotSupported:
+            return "File doesn't support"
+        }
+    }
+}

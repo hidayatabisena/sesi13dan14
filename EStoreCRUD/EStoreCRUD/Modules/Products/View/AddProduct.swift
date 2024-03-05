@@ -11,11 +11,11 @@ struct AddProduct: View {
     @StateObject private var addVM = ProductVM()
     
     var newProduct = CreateProduct(
-        title: "Sleek Clothes Part 2",
+        title: "Fruits attempt 5",
         price: 10,
-        description: "This is another testing from iSwift",
-        categoryId: 2,
-        images: ["https://i.pravatar.cc/150?img=31", "https://picsum.photos/id/1/200/300"]
+        description: "This is another testing from iSwift part 2",
+        categoryId: 5,
+        images: []
     )
     
     @State private var productImage = UIImage(named: "newphoto")!
@@ -46,10 +46,13 @@ struct AddProduct: View {
                         await submitProduct()
                     }
                 }
+                .disabled(addVM.isLoading)
                 .buttonStyle(.borderedProminent)
             }
             .padding()
             .navigationTitle("Form Product")
+            .disabled(addVM.isLoading)
+            .blur(radius: addVM.isLoading ? 3.0 : 0.0)
             .navigationBarTitleDisplayMode(.inline)
         }
         .confirmationDialog("Choose your photo source", isPresented: $showPhoto) {
@@ -72,14 +75,12 @@ struct AddProduct: View {
     }
     
     private func submitProduct() async {
-        let imageUrls = newProduct.images.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-        
-        await addVM.addProduct(
+        await addVM.addProductWithImage(
             title: newProduct.title,
             price: newProduct.price,
             description: newProduct.description,
             categoryId: newProduct.categoryId,
-            images: imageUrls
+            image: productImage
         )
     }
 }

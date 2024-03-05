@@ -19,11 +19,15 @@ struct Product: Codable, Identifiable {
 extension Product {
     static var dummy: [Product] = [
         Product(
-            id: 180,
-            title: "nike air jordans",
-            price: 3000,
-            description: "limited edition",
-            images: ["https://placeimg.com/640/480/any", "https://i.imgur.com/qNOjJje.jpeg"],
+            id: 26,
+            title: "Sleek Mirror Finish Phone Case",
+            price: 27,
+            description: "Enhance your smartphone's look with this ultra-sleek mirror finish phone case. Designed to offer style with protection, the case features a reflective surface that adds a touch of elegance while keeping your device safe from scratches and impacts. Perfect for those who love a minimalist and modern aesthetic.",
+            images: [
+                "https://i.imgur.com/yb9UQKL.jpeg",
+                "https://i.imgur.com/m2owtQG.jpeg",
+                "https://i.imgur.com/bNiORct.jpeg"
+            ],
             category: Category.dummy
         )
     ]
